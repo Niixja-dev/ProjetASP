@@ -1,0 +1,43 @@
+@{
+    ViewData["Title"] = "Génération mensuelle";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-header bg-success text-white">
+                <h4>Génération mensuelle des fiches de paie</h4>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-info">
+                    Cette action va générer automatiquement les fiches de paie pour tous les employés actifs.
+                    <br/><strong>@ViewBag.EmployesActifs employé(s) actif(s)</strong> seront traités.
+                </div>
+                
+                @using (Html.BeginForm("GenerateMonthly", "Paies", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Mois</label>
+                            <input type="number" name="mois" class="form-control" value="@ViewBag.Mois" min="1" max="12" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Année</label>
+                            <input type="number" name="annee" class="form-control" value="@ViewBag.Annee" />
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-warning">
+                        Les fiches de paie existantes pour la période sélectionnée ne seront pas recréées.
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mt-4">
+                        <a href="@Url.Action("Index", "Paies")" class="btn btn-secondary">Retour</a>
+                        <button type="submit" class="btn btn-success">Générer les fiches</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

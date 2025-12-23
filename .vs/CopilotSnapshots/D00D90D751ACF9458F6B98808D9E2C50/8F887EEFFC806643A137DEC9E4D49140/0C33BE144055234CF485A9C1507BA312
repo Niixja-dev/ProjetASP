@@ -1,0 +1,38 @@
+﻿@model ProjetASP.Models.Paie
+@{
+    ViewData["Title"] = "Supprimer fiche de paie";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow border-danger">
+            <div class="card-header bg-danger text-white">
+                <h4>Confirmer la suppression</h4>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-warning">
+                    Êtes-vous sûr de vouloir supprimer cette fiche de paie ?
+                </div>
+                
+                <dl class="row">
+                    <dt class="col-sm-4">Employé</dt>
+                    <dd class="col-sm-8">@Model.Employe?.NomComplet</dd>
+                    <dt class="col-sm-4">Période</dt>
+                    <dd class="col-sm-8">@Model.Periode</dd>
+                    <dt class="col-sm-4">Salaire net</dt>
+                    <dd class="col-sm-8">@Model.SalaireNet.ToString("N2") €</dd>
+                </dl>
+                
+                @using (Html.BeginForm("Delete", "Paies", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(m => m.Id)
+                    <div class="d-flex justify-content-between">
+                        <a href="@Url.Action("Index", "Paies")" class="btn btn-secondary">Annuler</a>
+                        <button type="submit" class="btn btn-danger">Supprimer</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

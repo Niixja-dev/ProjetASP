@@ -1,0 +1,189 @@
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ProjetASP.Models;
+
+namespace ProjetASP.Controllers
+{
+    [Authorize(Roles = "Admin,RH")]
+    public class EmployesController : Controller
+    {
+        private readonly GRHContext _context;
+
+        public EmployesController(GRHContext context)
+        {
+            _context = context;
+        }
+
+        // GET: Employes
+        public async Task<IActionResult> Index(string? searchString, string? departement)
+        {
+            var employes = from e in _context.Employes select e;
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                employes = employes.Where(e => e.Nom.Contains(searchString) 
+                    || e.Prenom.Contains(searchString) 
+                    || e.Matricule.Contains(searchString));
+            }
+
+            if (!string.IsNullOrEmpty(departement))
+            {
+                employes = employes.Where(e => e.Departement == departement);
+            }
+
+            ViewBag.Departements = await _context.Employes
+                .Where(e => e.Departement != null)
+                .Select(e => e.Departement)
+                .Distinct()
+                .ToListAsync();
+
+            return View(await employes.OrderBy(e => e.Nom).ToListAsync());
+        }
+
+        // GET: Employes/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var employe = await _context.Employes
+                .Include(e => e.Conges)
+                .Include(e => e.Paies)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (employe == null)
+            {
+                return NotFound();
+            }
+
+            return View(employe);
+        }
+
+        // GET: Employes/Create
+        public IActionResult Create()
+        {
+            var employe = new Employe
+            {
+                DateEmbauche = DateTime.Today,
+                Matricule = GenerateMatricule()
+            };
+            return View(employe);
+        }
+
+        // POST: Employes/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Matricule,Nom,Prenom,Email,Telephone,DateEmbauche,SalaireBase,Poste,Departement,SoldeConges,EstActif")] Employe employe)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(employe);
+                await _context.SaveChangesAsync();
+                TempData["Success"] = "Employé créé avec succès.";
+                return RedirectToAction(nameof(Index));
+            }
+            return View(employe);
+        }
+
+        // GET: Employes/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var employe = await _context.Employes.FindAsync(id);
+            if (employe == null)
+            {
+                return NotFound();
+            }
+            return View(employe);
+        }
+
+        // POST: Employes/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Matricule,Nom,Prenom,Email,Telephone,DateEmbauche,SalaireBase,Poste,Departement,SoldeConges,EstActif")] Employe employe)
+        {
+            if (id != employe.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(employe);
+                    await _context.SaveChangesAsync();
+                    TempData["Success"] = "Employé modifié avec succès.";
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!EmployeExists(employe.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(employe);
+        }
+
+        // GET: Employes/Delete/5
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var employe = await _context.Employes
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (employe == null)
+            {
+                return NotFound();
+            }
+
+            return View(employe);
+        }
+
+        // POST: Employes/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var employe = await _context.Employes.FindAsync(id);
+            if (employe != null)
+            {
+                _context.Employes.Remove(employe);
+                await _context.SaveChangesAsync();
+                TempData["Success"] = "Employé supprimé avec succès.";
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool EmployeExists(int id)
+        {
+            return _context.Employes.Any(e => e.Id == id);
+        }
+
+        private string GenerateMatricule()
+        {
+            var year = DateTime.Now.Year.ToString().Substring(2);
+            var count = _context.Employes.Count() + 1;
+            return $"EMP{year}{count:D4}";
+        }
+    }
+}

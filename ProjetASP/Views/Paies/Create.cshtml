@@ -1,0 +1,84 @@
+@model ProjetASP.Models.Paie
+@{
+    ViewData["Title"] = "Nouvelle fiche de paie";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h4><i class="bi bi-file-earmark-plus me-2"></i>Nouvelle fiche de paie</h4>
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm("Create", "Paies", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger mb-3" })
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Employé</label>
+                            @Html.DropDownListFor(m => m.EmployeId, ViewBag.Employes as SelectList, "-- Sélectionner --", new { @class = "form-select" })
+                            @Html.ValidationMessageFor(m => m.EmployeId, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label class="form-label">Mois</label>
+                            @Html.TextBoxFor(m => m.Mois, new { @class = "form-control", type = "number", min = "1", max = "12" })
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label class="form-label">Année</label>
+                            @Html.TextBoxFor(m => m.Annee, new { @class = "form-control", type = "number" })
+                        </div>
+                    </div>
+                    
+                    <h5 class="border-bottom pb-2 mb-3 mt-4">Éléments de rémunération</h5>
+                    
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Primes</label>
+                            <div class="input-group">
+                                @Html.TextBoxFor(m => m.Primes, new { @class = "form-control", type = "number", step = "0.01" })
+                                <span class="input-group-text">€</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Heures supplémentaires</label>
+                            <div class="input-group">
+                                @Html.TextBoxFor(m => m.HeuresSupplementaires, new { @class = "form-control", type = "number", step = "0.01" })
+                                <span class="input-group-text">€</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Retenues</label>
+                            <div class="input-group">
+                                @Html.TextBoxFor(m => m.Retenues, new { @class = "form-control", type = "number", step = "0.01" })
+                                <span class="input-group-text">€</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Jours travaillés</label>
+                            @Html.TextBoxFor(m => m.JoursTravailles, new { @class = "form-control", type = "number" })
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Commentaire</label>
+                        @Html.TextAreaFor(m => m.Commentaire, new { @class = "form-control", rows = "2" })
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mt-4">
+                        <a href="@Url.Action("Index", "Paies")" class="btn btn-secondary"><i class="bi bi-arrow-left me-2"></i>Retour</a>
+                        <button type="submit" class="btn btn-primary"><i class="bi bi-check-lg me-2"></i>Créer</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

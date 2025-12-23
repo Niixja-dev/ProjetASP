@@ -1,0 +1,633 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Projets\\C#\\ProjetASP\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Abdel\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\-1473887630\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\views\\employes\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\views\\employes\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\views\\account\\users.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\views\\account\\users.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\views\\employes\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\views\\employes\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\views\\employes\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\views\\employes\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\views\\conges\\approve.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\views\\conges\\approve.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\controllers\\congescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\controllers\\congescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\viewmodels\\accountviewmodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\viewmodels\\accountviewmodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\models\\conge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\models\\conge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\views\\account\\accessdenied.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\views\\account\\accessdenied.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\models\\paie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\models\\paie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\projetasp.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\projetasp.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\models\\employe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\models\\employe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\models\\utilisateur.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\models\\utilisateur.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\models\\grhcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\models\\grhcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\controllers\\employescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\controllers\\employescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\controllers\\paiescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\controllers\\paiescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\views\\employes\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\views\\employes\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\views\\employes\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\views\\employes\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\views\\conges\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\views\\conges\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\views\\conges\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\views\\conges\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\views\\conges\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\views\\conges\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\views\\conges\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\views\\conges\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\views\\paies\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\views\\paies\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\views\\paies\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\views\\paies\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\views\\paies\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\views\\paies\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\views\\paies\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\views\\paies\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\views\\paies\\generatemonthly.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\views\\paies\\generatemonthly.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\views\\paies\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\views\\paies\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|c:\\projets\\c#\\projetasp\\projetasp\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{454C846C-882F-FB60-507C-2999592562F8}|ProjetASP\\ProjetASP.csproj|solutionrelative:projetasp\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Program.cs",
+              "RelativeDocumentMoniker": "ProjetASP\\Program.cs",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Program.cs",
+              "RelativeToolTip": "ProjetASP\\Program.cs",
+              "ViewState": "AgIAAHcAAAAAAAAAAAAEwIMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-23T20:05:38.558Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Abdel\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\-1473887630\\Program.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Users\\Abdel\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\-1473887630\\Program.cs",
+              "ToolTip": "C:\\Users\\Abdel\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\-1473887630\\Program.cs",
+              "RelativeToolTip": "..\\..\\..\\Users\\Abdel\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\-1473887630\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-23T20:05:26.998Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Account\\Login.cshtml",
+              "RelativeDocumentMoniker": "ProjetASP\\Views\\Account\\Login.cshtml",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Account\\Login.cshtml",
+              "RelativeToolTip": "ProjetASP\\Views\\Account\\Login.cshtml",
+              "ViewState": "AgIAACwAAAAAAAAAAIBJwCYAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-23T14:40:51.4Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Employes\\Edit.cshtml",
+              "RelativeDocumentMoniker": "ProjetASP\\Views\\Employes\\Edit.cshtml",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Employes\\Edit.cshtml",
+              "RelativeToolTip": "ProjetASP\\Views\\Employes\\Edit.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-23T14:42:28.808Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Users.cshtml",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Account\\Users.cshtml",
+              "RelativeDocumentMoniker": "ProjetASP\\Views\\Account\\Users.cshtml",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Account\\Users.cshtml",
+              "RelativeToolTip": "ProjetASP\\Views\\Account\\Users.cshtml",
+              "ViewState": "AgIAACcAAAAAAAAAAAAAACwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-23T14:41:20.562Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Employes\\Details.cshtml",
+              "RelativeDocumentMoniker": "ProjetASP\\Views\\Employes\\Details.cshtml",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Employes\\Details.cshtml",
+              "RelativeToolTip": "ProjetASP\\Views\\Employes\\Details.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-23T14:42:57.176Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AccountViewModels.cs",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\ViewModels\\AccountViewModels.cs",
+              "RelativeDocumentMoniker": "ProjetASP\\ViewModels\\AccountViewModels.cs",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\ViewModels\\AccountViewModels.cs",
+              "RelativeToolTip": "ProjetASP\\ViewModels\\AccountViewModels.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-23T14:33:29.137Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Register.cshtml",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Account\\Register.cshtml",
+              "RelativeDocumentMoniker": "ProjetASP\\Views\\Account\\Register.cshtml",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Account\\Register.cshtml",
+              "RelativeToolTip": "ProjetASP\\Views\\Account\\Register.cshtml",
+              "ViewState": "AgIAADQAAAAAAAAAAAAAwEQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-23T14:41:10.582Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "CongesController.cs",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Controllers\\CongesController.cs",
+              "RelativeDocumentMoniker": "ProjetASP\\Controllers\\CongesController.cs",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Controllers\\CongesController.cs",
+              "RelativeToolTip": "ProjetASP\\Controllers\\CongesController.cs",
+              "ViewState": "AgIAADsAAAAAAAAAAAAYwL8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-23T14:35:01.658Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Approve.cshtml",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Conges\\Approve.cshtml",
+              "RelativeDocumentMoniker": "ProjetASP\\Views\\Conges\\Approve.cshtml",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Conges\\Approve.cshtml",
+              "RelativeToolTip": "ProjetASP\\Views\\Conges\\Approve.cshtml",
+              "ViewState": "AgIAABEAAAAAAAAAAAAAwCMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-23T14:44:50.26Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Employes\\Create.cshtml",
+              "RelativeDocumentMoniker": "ProjetASP\\Views\\Employes\\Create.cshtml",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Employes\\Create.cshtml",
+              "RelativeToolTip": "ProjetASP\\Views\\Employes\\Create.cshtml",
+              "ViewState": "AgIAAFAAAAAAAAAAAAAAwGMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-23T14:42:10.231Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "ProjetASP\\Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "ProjetASP\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAAJwAAAAAAAAAAIBJwGsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-23T14:33:51.116Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Conge.cs",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Models\\Conge.cs",
+              "RelativeDocumentMoniker": "ProjetASP\\Models\\Conge.cs",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Models\\Conge.cs",
+              "RelativeToolTip": "ProjetASP\\Models\\Conge.cs",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAIwE0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-23T14:32:42.27Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "AccessDenied.cshtml",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Account\\AccessDenied.cshtml",
+              "RelativeDocumentMoniker": "ProjetASP\\Views\\Account\\AccessDenied.cshtml",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Account\\AccessDenied.cshtml",
+              "RelativeToolTip": "ProjetASP\\Views\\Account\\AccessDenied.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-23T14:41:28.621Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Paie.cs",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Models\\Paie.cs",
+              "RelativeDocumentMoniker": "ProjetASP\\Models\\Paie.cs",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Models\\Paie.cs",
+              "RelativeToolTip": "ProjetASP\\Models\\Paie.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-23T14:32:59.646Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "ProjetASP\\Views\\_ViewImports.cshtml",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\_ViewImports.cshtml",
+              "RelativeToolTip": "ProjetASP\\Views\\_ViewImports.cshtml",
+              "ViewState": "AgIAAAIAAAAAAAAAAIBJwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-23T14:47:26.839Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "ProjetASP\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "ProjetASP\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAFkAAAAAAAAAAIBJwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-23T14:39:02.532Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "GenerateMonthly.cshtml",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Paies\\GenerateMonthly.cshtml",
+              "RelativeDocumentMoniker": "ProjetASP\\Views\\Paies\\GenerateMonthly.cshtml",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Paies\\GenerateMonthly.cshtml",
+              "RelativeToolTip": "ProjetASP\\Views\\Paies\\GenerateMonthly.cshtml",
+              "ViewState": "AgIAACgAAAAAAAAAAABRwCsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-23T14:47:07.853Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "ProjetASP\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "ProjetASP\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAGoAAAAAAAAAAABRwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-23T14:40:15.557Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Paies\\Delete.cshtml",
+              "RelativeDocumentMoniker": "ProjetASP\\Views\\Paies\\Delete.cshtml",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Paies\\Delete.cshtml",
+              "RelativeToolTip": "ProjetASP\\Views\\Paies\\Delete.cshtml",
+              "ViewState": "AgIAACQAAAAAAAAAAIBJwCYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-23T14:47:17.872Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\appsettings.json",
+              "RelativeDocumentMoniker": "ProjetASP\\appsettings.json",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\appsettings.json",
+              "RelativeToolTip": "ProjetASP\\appsettings.json",
+              "ViewState": "AgIAAAsAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-12-23T14:37:46Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Paies\\Edit.cshtml",
+              "RelativeDocumentMoniker": "ProjetASP\\Views\\Paies\\Edit.cshtml",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Paies\\Edit.cshtml",
+              "RelativeToolTip": "ProjetASP\\Views\\Paies\\Edit.cshtml",
+              "ViewState": "AgIAAFYAAAAAAAAAAIBJwFgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-23T14:46:53.937Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Paies\\Details.cshtml",
+              "RelativeDocumentMoniker": "ProjetASP\\Views\\Paies\\Details.cshtml",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Paies\\Details.cshtml",
+              "RelativeToolTip": "ProjetASP\\Views\\Paies\\Details.cshtml",
+              "ViewState": "AgIAAFoAAAAAAAAAAABRwF0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-23T14:46:30.564Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Paies\\Create.cshtml",
+              "RelativeDocumentMoniker": "ProjetASP\\Views\\Paies\\Create.cshtml",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Paies\\Create.cshtml",
+              "RelativeToolTip": "ProjetASP\\Views\\Paies\\Create.cshtml",
+              "ViewState": "AgIAAFEAAAAAAAAAAABRwFQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-23T14:46:02.567Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Paies\\Index.cshtml",
+              "RelativeDocumentMoniker": "ProjetASP\\Views\\Paies\\Index.cshtml",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Paies\\Index.cshtml",
+              "RelativeToolTip": "ProjetASP\\Views\\Paies\\Index.cshtml",
+              "ViewState": "AgIAADUAAAAAAAAAAABRwDgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-23T14:45:27.212Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Conges\\Delete.cshtml",
+              "RelativeDocumentMoniker": "ProjetASP\\Views\\Conges\\Delete.cshtml",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Conges\\Delete.cshtml",
+              "RelativeToolTip": "ProjetASP\\Views\\Conges\\Delete.cshtml",
+              "ViewState": "AgIAACUAAAAAAAAAAIBJwCcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-23T14:45:00.209Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Conges\\Details.cshtml",
+              "RelativeDocumentMoniker": "ProjetASP\\Views\\Conges\\Details.cshtml",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Conges\\Details.cshtml",
+              "RelativeToolTip": "ProjetASP\\Views\\Conges\\Details.cshtml",
+              "ViewState": "AgIAAEwAAAAAAAAAAIBJwE4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-23T14:44:40.322Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Conges\\Create.cshtml",
+              "RelativeDocumentMoniker": "ProjetASP\\Views\\Conges\\Create.cshtml",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Conges\\Create.cshtml",
+              "RelativeToolTip": "ProjetASP\\Views\\Conges\\Create.cshtml",
+              "ViewState": "AgIAADsAAAAAAAAAAIBJwD0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-23T14:43:48.643Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Conges\\Index.cshtml",
+              "RelativeDocumentMoniker": "ProjetASP\\Views\\Conges\\Index.cshtml",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Conges\\Index.cshtml",
+              "RelativeToolTip": "ProjetASP\\Views\\Conges\\Index.cshtml",
+              "ViewState": "AgIAAEMAAAAAAAAAAABRwEYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-23T14:43:31.72Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Employes\\Delete.cshtml",
+              "RelativeDocumentMoniker": "ProjetASP\\Views\\Employes\\Delete.cshtml",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Employes\\Delete.cshtml",
+              "RelativeToolTip": "ProjetASP\\Views\\Employes\\Delete.cshtml",
+              "ViewState": "AgIAACcAAAAAAAAAAIBJwCkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-23T14:43:08.301Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "ProjetASP\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "ProjetASP\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAEBVwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-23T14:37:25.515Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Employes\\Index.cshtml",
+              "RelativeDocumentMoniker": "ProjetASP\\Views\\Employes\\Index.cshtml",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Employes\\Index.cshtml",
+              "RelativeToolTip": "ProjetASP\\Views\\Employes\\Index.cshtml",
+              "ViewState": "AgIAAEUAAAAAAAAAAABRwEgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-23T14:41:49.467Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "PaiesController.cs",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Controllers\\PaiesController.cs",
+              "RelativeDocumentMoniker": "ProjetASP\\Controllers\\PaiesController.cs",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Controllers\\PaiesController.cs",
+              "RelativeToolTip": "ProjetASP\\Controllers\\PaiesController.cs",
+              "ViewState": "AgIAADEBAAAAAAAAAEBVwDUBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-23T14:37:05.026Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Utilisateur.cs",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Models\\Utilisateur.cs",
+              "RelativeDocumentMoniker": "ProjetASP\\Models\\Utilisateur.cs",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Models\\Utilisateur.cs",
+              "RelativeToolTip": "ProjetASP\\Models\\Utilisateur.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-23T14:33:07.802Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "GRHContext.cs",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Models\\GRHContext.cs",
+              "RelativeDocumentMoniker": "ProjetASP\\Models\\GRHContext.cs",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Models\\GRHContext.cs",
+              "RelativeToolTip": "ProjetASP\\Models\\GRHContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-23T14:33:17.59Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "EmployesController.cs",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Controllers\\EmployesController.cs",
+              "RelativeDocumentMoniker": "ProjetASP\\Controllers\\EmployesController.cs",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Controllers\\EmployesController.cs",
+              "RelativeToolTip": "ProjetASP\\Controllers\\EmployesController.cs",
+              "ViewState": "AgIAAKMAAAAAAAAAAMBdwKkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-23T14:34:18.379Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ProjetASP.csproj",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\ProjetASP.csproj",
+              "RelativeDocumentMoniker": "ProjetASP\\ProjetASP.csproj",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\ProjetASP.csproj",
+              "RelativeToolTip": "ProjetASP\\ProjetASP.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-12-23T14:28:10.864Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Employe.cs",
+              "DocumentMoniker": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Models\\Employe.cs",
+              "RelativeDocumentMoniker": "ProjetASP\\Models\\Employe.cs",
+              "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Models\\Employe.cs",
+              "RelativeToolTip": "ProjetASP\\Models\\Employe.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-23T14:32:27.789Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

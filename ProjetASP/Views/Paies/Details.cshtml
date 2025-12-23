@@ -1,0 +1,93 @@
+@model ProjetASP.Models.Paie
+@{
+    ViewData["Title"] = "Détails fiche de paie";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
+                <h4 class="mb-0"><i class="bi bi-file-earmark-text me-2"></i>Bulletin de paie</h4>
+                <span class="badge bg-light text-dark fs-6">@Model.Periode</span>
+            </div>
+            <div class="card-body">
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <h5>Employé</h5>
+                        <p class="mb-0"><strong>@Model.Employe?.NomComplet</strong></p>
+                        <p class="text-muted mb-0">@Model.Employe?.Poste</p>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        @if (Model.EstPaye)
+                        {
+                            <span class="badge bg-success fs-5">Payé</span>
+                            <p class="text-muted mb-0 mt-2">Le @Model.DatePaiement?.ToString("dd/MM/yyyy")</p>
+                        }
+                        else
+                        {
+                            <span class="badge bg-warning text-dark fs-5">En attente</span>
+                        }
+                    </div>
+                </div>
+                
+                <table class="table table-bordered">
+                    <thead class="table-light">
+                        <tr><th colspan="2">Rémunération</th><th class="text-end">Montant</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="2">Salaire de base</td>
+                            <td class="text-end">@Model.SalaireBase.ToString("N2") €</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Primes</td>
+                            <td class="text-end">@Model.Primes.ToString("N2") €</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Heures supplémentaires</td>
+                            <td class="text-end">@Model.HeuresSupplementaires.ToString("N2") €</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Retenues</td>
+                            <td class="text-end text-danger">-@Model.Retenues.ToString("N2") €</td>
+                        </tr>
+                        <tr class="table-secondary">
+                            <td colspan="2"><strong>Salaire brut</strong></td>
+                            <td class="text-end"><strong>@Model.SalaireBrut.ToString("N2") €</strong></td>
+                        </tr>
+                    </tbody>
+                    <thead class="table-light">
+                        <tr><th colspan="2">Déductions</th><th class="text-end">Montant</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="2">Cotisations sociales</td>
+                            <td class="text-end text-danger">-@Model.CotisationsSociales.ToString("N2") €</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Impôt sur le revenu</td>
+                            <td class="text-end text-danger">-@Model.ImpotRevenu.ToString("N2") €</td>
+                        </tr>
+                    </tbody>
+                    <tfoot class="table-success">
+                        <tr>
+                            <td colspan="2"><strong class="fs-5">Salaire net à payer</strong></td>
+                            <td class="text-end"><strong class="fs-5">@Model.SalaireNet.ToString("N2") €</strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+                
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <p><strong>Jours travaillés :</strong> @Model.JoursTravailles</p>
+                        <p><strong>Jours d'absence :</strong> @Model.JoursAbsence</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+                <a href="@Url.Action("Index", "Paies")" class="btn btn-secondary"><i class="bi bi-arrow-left me-2"></i>Retour</a>
+                <a href="@Url.Action("Edit", "Paies", new { id = Model.Id })" class="btn btn-warning"><i class="bi bi-pencil me-2"></i>Modifier</a>
+            </div>
+        </div>
+    </div>
+</div>

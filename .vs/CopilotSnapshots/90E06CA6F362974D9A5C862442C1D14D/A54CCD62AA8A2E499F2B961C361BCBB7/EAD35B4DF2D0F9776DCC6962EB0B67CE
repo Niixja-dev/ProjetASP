@@ -1,0 +1,158 @@
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using ProjetASP.Models;
+using ProjetASP.ViewModels;
+
+namespace ProjetASP.Controllers
+{
+    public class AccountController : Controller
+    {
+        private readonly UserManager<Utilisateur> _userManager;
+        private readonly SignInManager<Utilisateur> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly ILogger<AccountController> _logger;
+
+        public AccountController(
+            UserManager<Utilisateur> userManager,
+            SignInManager<Utilisateur> signInManager,
+            RoleManager<IdentityRole> roleManager,
+            ILogger<AccountController> logger)
+        {
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _roleManager = roleManager;
+            _logger = logger;
+        }
+
+        // GET: Account/Login
+        [HttpGet]
+        public IActionResult Login(string returnUrl)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            return View();
+        }
+
+        // POST: Account/Login
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+
+            if (ModelState.IsValid)
+            {
+                _logger.LogInformation("Tentative de connexion pour: {Email}", model.Email);
+                
+                // Utiliser PasswordSignInAsync qui gère tout le processus de connexion
+                var result = await _signInManager.PasswordSignInAsync(
+                    model.Email, 
+                    model.Password, 
+                    model.RememberMe, 
+                    lockoutOnFailure: false);
+
+                if (result.Succeeded)
+                {
+                    _logger.LogInformation("Connexion réussie pour: {Email}", model.Email);
+                    
+                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
+                    return RedirectToAction("Index", "Home");
+                }
+                
+                if (result.IsLockedOut)
+                {
+                    _logger.LogWarning("Compte verrouillé: {Email}", model.Email);
+                    ModelState.AddModelError("", "Compte verrouillé.");
+                }
+                else if (result.IsNotAllowed)
+                {
+                    _logger.LogWarning("Connexion non autorisée: {Email}", model.Email);
+                    ModelState.AddModelError("", "Connexion non autorisée.");
+                }
+                else
+                {
+                    _logger.LogWarning("Échec de connexion pour: {Email}", model.Email);
+                    ModelState.AddModelError("", "Email ou mot de passe incorrect.");
+                }
+                
+                return View(model);
+            }
+
+            return View(model);
+        }
+
+        // GET: Account/Register
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        // POST: Account/Register
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new Utilisateur();
+                user.UserName = model.Email;
+                user.Email = model.Email;
+                user.Nom = model.Nom;
+                user.Prenom = model.Prenom;
+
+                var result = await _userManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    // Créer le rôle s'il n'existe pas
+                    var roleExists = await _roleManager.RoleExistsAsync(model.Role);
+                    if (!roleExists)
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(model.Role));
+                    }
+
+                    await _userManager.AddToRoleAsync(user, model.Role);
+
+                    TempData["Success"] = "Utilisateur créé avec succès.";
+                    return RedirectToAction("Users");
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+            }
+
+            return View(model);
+        }
+
+        // GET: Account/Users
+        [Authorize(Roles = "Admin")]
+        public IActionResult Users()
+        {
+            var users = _userManager.Users.ToList();
+            return View(users);
+        }
+
+        // POST: Account/Logout
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
+        // GET: Account/AccessDenied
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+    }
+}

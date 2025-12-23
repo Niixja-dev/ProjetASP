@@ -1,0 +1,78 @@
+@model ProjetASP.Models.Conge
+@{
+    ViewData["Title"] = "Détails du congé";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-header bg-info text-white">
+                <h4><i class="bi bi-calendar-check me-2"></i>Détails de la demande</h4>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-4">Employé</dt>
+                    <dd class="col-sm-8">@Model.Employe?.NomComplet</dd>
+                    
+                    <dt class="col-sm-4">Type de congé</dt>
+                    <dd class="col-sm-8">@Model.Type</dd>
+                    
+                    <dt class="col-sm-4">Période</dt>
+                    <dd class="col-sm-8">Du @Model.DateDebut.ToString("dd/MM/yyyy") au @Model.DateFin.ToString("dd/MM/yyyy")</dd>
+                    
+                    <dt class="col-sm-4">Nombre de jours</dt>
+                    <dd class="col-sm-8"><span class="badge bg-info">@Model.NombreJours jours</span></dd>
+                    
+                    <dt class="col-sm-4">Date de demande</dt>
+                    <dd class="col-sm-8">@Model.DateDemande.ToString("dd/MM/yyyy HH:mm")</dd>
+                    
+                    <dt class="col-sm-4">Statut</dt>
+                    <dd class="col-sm-8">
+                        @if (Model.Statut == StatutConge.EnAttente)
+                        {
+                            <span class="badge bg-warning text-dark">En attente</span>
+                        }
+                        else if (Model.Statut == StatutConge.Approuve)
+                        {
+                            <span class="badge bg-success">Approuvé</span>
+                        }
+                        else if (Model.Statut == StatutConge.Refuse)
+                        {
+                            <span class="badge bg-danger">Refusé</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">Annulé</span>
+                        }
+                    </dd>
+                    
+                    @if (!string.IsNullOrEmpty(Model.Motif))
+                    {
+                        <dt class="col-sm-4">Motif</dt>
+                        <dd class="col-sm-8">@Model.Motif</dd>
+                    }
+                    
+                    @if (!string.IsNullOrEmpty(Model.CommentaireRH))
+                    {
+                        <dt class="col-sm-4">Commentaire RH</dt>
+                        <dd class="col-sm-8">@Model.CommentaireRH</dd>
+                    }
+                </dl>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+                <a href="@Url.Action("Index", "Conges")" class="btn btn-secondary"><i class="bi bi-arrow-left me-2"></i>Retour</a>
+                @if (Model.Statut == StatutConge.EnAttente)
+                {
+                    <div>
+                        <a href="@Url.Action("Approve", "Conges", new { id = Model.Id })" class="btn btn-success"><i class="bi bi-check-lg me-2"></i>Approuver</a>
+                        @using (Html.BeginForm("Refuse", "Conges", new { id = Model.Id }, FormMethod.Post, null, new { style = "display:inline;" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-danger"><i class="bi bi-x-lg me-2"></i>Refuser</button>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

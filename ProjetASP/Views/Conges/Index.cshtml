@@ -1,0 +1,70 @@
+@model IEnumerable<ProjetASP.Models.Conge>
+@{
+    ViewData["Title"] = "Gestion des congés";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Gestion des congés</h2>
+    <a href="@Url.Action("Create", "Conges")" class="btn btn-primary">Nouvelle demande</a>
+</div>
+
+<div class="card shadow">
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th>Employé</th>
+                    <th>Type</th>
+                    <th>Période</th>
+                    <th>Jours</th>
+                    <th>Demande</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var conge in Model)
+                {
+                    <tr>
+                        <td>@conge.Employe?.NomComplet</td>
+                        <td>@conge.Type</td>
+                        <td>@conge.DateDebut.ToString("dd/MM/yyyy") - @conge.DateFin.ToString("dd/MM/yyyy")</td>
+                        <td><span class="badge bg-secondary">@conge.NombreJours j</span></td>
+                        <td>@conge.DateDemande.ToString("dd/MM/yyyy")</td>
+                        <td>
+                            @if (conge.Statut == StatutConge.EnAttente)
+                            {
+                                <span class="badge bg-warning text-dark">En attente</span>
+                            }
+                            else if (conge.Statut == StatutConge.Approuve)
+                            {
+                                <span class="badge bg-success">Approuvé</span>
+                            }
+                            else if (conge.Statut == StatutConge.Refuse)
+                            {
+                                <span class="badge bg-danger">Refusé</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">Annulé</span>
+                            }
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Details", "Conges", new { id = conge.Id })" class="btn btn-sm btn-outline-info">Détails</a>
+                            @if (conge.Statut == StatutConge.EnAttente)
+                            {
+                                <a href="@Url.Action("Approve", "Conges", new { id = conge.Id })" class="btn btn-sm btn-outline-success">Approuver</a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @if (!Model.Any())
+        {
+            <div class="text-center text-muted py-4">
+                <p>Aucune demande de congé trouvée</p>
+            </div>
+        }
+    </div>
+</div>

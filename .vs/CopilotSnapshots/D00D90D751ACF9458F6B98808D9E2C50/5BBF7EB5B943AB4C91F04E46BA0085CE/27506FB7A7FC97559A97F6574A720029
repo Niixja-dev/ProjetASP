@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Génération mensuelle des paies";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-header bg-success text-white">
+                <h4><i class="bi bi-calculator me-2"></i>Génération mensuelle des fiches de paie</h4>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle me-2"></i>
+                    Cette action va générer automatiquement les fiches de paie pour tous les employés actifs.
+                    <br/><strong>@ViewBag.EmployesActifs employé(s) actif(s)</strong> seront traités.
+                </div>
+                
+                <form asp-action="GenerateMonthly" method="post">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Mois</label>
+                            <select name="mois" class="form-select">
+                                @for (int i = 1; i <= 12; i++)
+                                {
+                                    <option value="@i" selected="@(ViewBag.Mois == i)">@System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i)</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Année</label>
+                            <select name="annee" class="form-select">
+                                @for (int i = DateTime.Now.Year; i >= DateTime.Now.Year - 2; i--)
+                                {
+                                    <option value="@i" selected="@(ViewBag.Annee == i)">@i</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-warning">
+                        <i class="bi bi-exclamation-triangle me-2"></i>
+                        Les fiches de paie existantes pour la période sélectionnée ne seront pas recréées.
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mt-4">
+                        <a asp-action="Index" class="btn btn-secondary"><i class="bi bi-arrow-left me-2"></i>Retour</a>
+                        <button type="submit" class="btn btn-success"><i class="bi bi-calculator me-2"></i>Générer les fiches</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

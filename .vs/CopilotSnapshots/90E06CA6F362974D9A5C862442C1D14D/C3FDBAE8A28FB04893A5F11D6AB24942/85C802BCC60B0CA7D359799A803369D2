@@ -1,0 +1,141 @@
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using ProjetASP.Models;
+using ProjetASP.ViewModels;
+
+namespace ProjetASP.Controllers
+{
+    public class AccountController : Controller
+    {
+        private readonly UserManager<Utilisateur> _userManager;
+        private readonly SignInManager<Utilisateur> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+
+        public AccountController(
+            UserManager<Utilisateur> userManager,
+            SignInManager<Utilisateur> signInManager,
+            RoleManager<IdentityRole> roleManager)
+        {
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _roleManager = roleManager;
+        }
+
+        // GET: Account/Login
+        [HttpGet]
+        public IActionResult Login(string returnUrl)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            return View();
+        }
+
+        // POST: Account/Login
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+
+            if (ModelState.IsValid)
+            {
+                // Trouver l'utilisateur par email
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                
+                if (user != null)
+                {
+                    // Vérifier le mot de passe
+                    var passwordValid = await _userManager.CheckPasswordAsync(user, model.Password);
+                    
+                    if (passwordValid)
+                    {
+                        // Connecter l'utilisateur
+                        await _signInManager.SignInAsync(user, model.RememberMe);
+                        
+                        if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                        {
+                            return Redirect(returnUrl);
+                        }
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+                
+                ModelState.AddModelError("", "Email ou mot de passe incorrect.");
+                return View(model);
+            }
+
+            return View(model);
+        }
+
+        // GET: Account/Register
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        // POST: Account/Register
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new Utilisateur();
+                user.UserName = model.Email;
+                user.Email = model.Email;
+                user.Nom = model.Nom;
+                user.Prenom = model.Prenom;
+
+                var result = await _userManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    // Créer le rôle s'il n'existe pas
+                    var roleExists = await _roleManager.RoleExistsAsync(model.Role);
+                    if (!roleExists)
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(model.Role));
+                    }
+
+                    await _userManager.AddToRoleAsync(user, model.Role);
+
+                    TempData["Success"] = "Utilisateur créé avec succès.";
+                    return RedirectToAction("Users");
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+            }
+
+            return View(model);
+        }
+
+        // GET: Account/Users
+        [Authorize(Roles = "Admin")]
+        public IActionResult Users()
+        {
+            var users = _userManager.Users.ToList();
+            return View(users);
+        }
+
+        // POST: Account/Logout
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
+        // GET: Account/AccessDenied
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+    }
+}

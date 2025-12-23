@@ -1,0 +1,309 @@
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using ProjetASP.Models;
+
+namespace ProjetASP.Controllers
+{
+    [Authorize(Roles = "Admin,RH")]
+    public class PaiesController : Controller
+    {
+        private readonly GRHContext _context;
+
+        public PaiesController(GRHContext context)
+        {
+            _context = context;
+        }
+
+        // GET: Paies
+        public IActionResult Index()
+        {
+            var paies = _context.Paies.Include(p => p.Employe).OrderByDescending(p => p.Annee).ThenByDescending(p => p.Mois).ToList();
+            ViewBag.Employes = new SelectList(_context.Employes.ToList(), "Id", "NomComplet");
+            ViewBag.MoisActuel = DateTime.Now.Month;
+            ViewBag.AnneeActuelle = DateTime.Now.Year;
+            return View(paies);
+        }
+
+        // GET: Paies/Details/5
+        public IActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var paie = _context.Paies.Include(p => p.Employe).FirstOrDefault(m => m.Id == id);
+
+            if (paie == null)
+            {
+                return NotFound();
+            }
+
+            return View(paie);
+        }
+
+        // GET: Paies/Create
+        public IActionResult Create()
+        {
+            ViewBag.Employes = new SelectList(_context.Employes.Where(e => e.EstActif).ToList(), "Id", "NomComplet");
+            
+            var paie = new Paie();
+            paie.Mois = DateTime.Now.Month;
+            paie.Annee = DateTime.Now.Year;
+            paie.JoursTravailles = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month);
+
+            return View(paie);
+        }
+
+        // POST: Paies/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Paie paie)
+        {
+            // Vérifier si une fiche de paie existe déjà
+            var existante = _context.Paies.Where(p => p.EmployeId == paie.EmployeId && p.Mois == paie.Mois && p.Annee == paie.Annee).Any();
+
+            if (existante)
+            {
+                ModelState.AddModelError("", "Une fiche de paie existe déjà pour cet employé ce mois-ci.");
+            }
+
+            if (ModelState.IsValid)
+            {
+                var employe = _context.Employes.Find(paie.EmployeId);
+                if (employe == null)
+                {
+                    return NotFound();
+                }
+
+                // Calculer les jours d'absence basés sur les congés approuvés
+                var congesApprouves = _context.Conges
+                    .Where(c => c.EmployeId == paie.EmployeId 
+                        && c.Statut == StatutConge.Approuve
+                        && c.DateDebut.Month == paie.Mois 
+                        && c.DateDebut.Year == paie.Annee)
+                    .ToList();
+
+                paie.JoursAbsence = congesApprouves.Sum(c => c.NombreJours);
+                paie.SalaireBase = employe.SalaireBase;
+
+                // Calcul des cotisations (15% du brut)
+                paie.CotisationsSociales = paie.SalaireBrut * 0.15m;
+
+                // Calcul de l'impôt
+                paie.ImpotRevenu = CalculerImpot(paie.SalaireBrut - paie.CotisationsSociales);
+
+                _context.Paies.Add(paie);
+                _context.SaveChanges();
+                TempData["Success"] = "Fiche de paie créée avec succès.";
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.Employes = new SelectList(_context.Employes.Where(e => e.EstActif).ToList(), "Id", "NomComplet", paie.EmployeId);
+            return View(paie);
+        }
+
+        // GET: Paies/Edit/5
+        public IActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var paie = _context.Paies.Include(p => p.Employe).FirstOrDefault(p => p.Id == id);
+            if (paie == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.Employes = new SelectList(_context.Employes.ToList(), "Id", "NomComplet", paie.EmployeId);
+            return View(paie);
+        }
+
+        // POST: Paies/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, Paie paie)
+        {
+            if (id != paie.Id)
+            {
+                return NotFound();
+            }
+
+            // Retirer la validation de l'Employe car c'est une navigation property
+            ModelState.Remove("Employe");
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Paies.Update(paie);
+                    _context.SaveChanges();
+                    TempData["Success"] = "Fiche de paie modifiée avec succès.";
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "Erreur lors de la modification: " + ex.Message);
+                }
+            }
+
+            // Recharger l'employé pour l'affichage
+            paie.Employe = _context.Employes.Find(paie.EmployeId);
+            ViewBag.Employes = new SelectList(_context.Employes.ToList(), "Id", "NomComplet", paie.EmployeId);
+            return View(paie);
+        }
+
+        // POST: Paies/MarkAsPaid/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult MarkAsPaid(int id)
+        {
+            var paie = _context.Paies.Find(id);
+            if (paie == null)
+            {
+                return NotFound();
+            }
+
+            paie.EstPaye = true;
+            paie.DatePaiement = DateTime.Now;
+
+            _context.SaveChanges();
+            TempData["Success"] = "Paiement enregistré avec succès.";
+            return RedirectToAction("Index");
+        }
+
+        // GET: Paies/GenerateMonthly
+        public IActionResult GenerateMonthly()
+        {
+            ViewBag.Mois = DateTime.Now.Month;
+            ViewBag.Annee = DateTime.Now.Year;
+            ViewBag.EmployesActifs = _context.Employes.Where(e => e.EstActif).Count();
+            return View();
+        }
+
+        // POST: Paies/GenerateMonthly
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult GenerateMonthly(int mois, int annee)
+        {
+            var employesActifs = _context.Employes.Where(e => e.EstActif).ToList();
+            int count = 0;
+            var erreurs = new List<string>();
+
+            Console.WriteLine($"Génération pour {mois}/{annee} - {employesActifs.Count} employés actifs trouvés");
+
+            foreach (var employe in employesActifs)
+            {
+                // Vérifier si la paie existe déjà
+                var existe = _context.Paies.Any(p => p.EmployeId == employe.Id && p.Mois == mois && p.Annee == annee);
+
+                Console.WriteLine($"Employé {employe.NomComplet} (ID: {employe.Id}) - Paie existe: {existe}");
+
+                if (!existe)
+                {
+                    var paie = new Paie
+                    {
+                        EmployeId = employe.Id,
+                        Mois = mois,
+                        Annee = annee,
+                        SalaireBase = employe.SalaireBase,
+                        JoursTravailles = DateTime.DaysInMonth(annee, mois)
+                    };
+
+                    // Calculer les jours d'absence
+                    var congesApprouves = _context.Conges
+                        .Where(c => c.EmployeId == employe.Id
+                            && c.Statut == StatutConge.Approuve
+                            && c.DateDebut.Month == mois
+                            && c.DateDebut.Year == annee)
+                        .ToList();
+
+                    paie.JoursAbsence = congesApprouves.Sum(c => c.NombreJours);
+                    paie.CotisationsSociales = paie.SalaireBrut * 0.15m;
+                    paie.ImpotRevenu = CalculerImpot(paie.SalaireBrut - paie.CotisationsSociales);
+
+                    _context.Paies.Add(paie);
+                    count++;
+                }
+            }
+
+            _context.SaveChanges();
+
+            if (employesActifs.Count == 0)
+            {
+                TempData["Warning"] = "Aucun employé actif trouvé. Vérifiez que vos employés ont le statut 'Actif'.";
+            }
+            else if (count == 0)
+            {
+                TempData["Warning"] = $"Aucune fiche générée. Les fiches de paie existent déjà pour tous les {employesActifs.Count} employés actifs pour {mois:D2}/{annee}.";
+            }
+            else
+            {
+                TempData["Success"] = $"{count} fiche(s) de paie générée(s) avec succès.";
+            }
+            
+            return RedirectToAction("Index");
+        }
+
+        // GET: Paies/Delete/5
+        [Authorize(Roles = "Admin")]
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var paie = _context.Paies.Include(p => p.Employe).FirstOrDefault(m => m.Id == id);
+
+            if (paie == null)
+            {
+                return NotFound();
+            }
+
+            return View(paie);
+        }
+
+        // POST: Paies/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var paie = _context.Paies.Find(id);
+            if (paie != null)
+            {
+                _context.Paies.Remove(paie);
+                _context.SaveChanges();
+                TempData["Success"] = "Fiche de paie supprimée avec succès.";
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        private decimal CalculerImpot(decimal revenuImposable)
+        {
+            // Barème simplifié d'impôt sur le revenu
+            if (revenuImposable <= 1000)
+            {
+                return 0;
+            }
+            else if (revenuImposable <= 3000)
+            {
+                return (revenuImposable - 1000) * 0.10m;
+            }
+            else if (revenuImposable <= 6000)
+            {
+                return 200 + (revenuImposable - 3000) * 0.20m;
+            }
+            else
+            {
+                return 800 + (revenuImposable - 6000) * 0.30m;
+            }
+        }
+    }
+}

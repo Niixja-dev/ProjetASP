@@ -1,0 +1,100 @@
+﻿@model ProjetASP.Models.Employe
+@{
+    ViewData["Title"] = "Modifier employé";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card shadow">
+            <div class="card-header bg-warning">
+                <h4><i class="bi bi-pencil me-2"></i>Modifier l'employé</h4>
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm("Edit", "Employes", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(m => m.Id)
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger mb-3" })
+                    
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            @Html.LabelFor(m => m.Matricule, new { @class = "form-label" })
+                            @Html.TextBoxFor(m => m.Matricule, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            @Html.LabelFor(m => m.Nom, new { @class = "form-label" })
+                            @Html.TextBoxFor(m => m.Nom, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Nom, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            @Html.LabelFor(m => m.Prenom, new { @class = "form-label" })
+                            @Html.TextBoxFor(m => m.Prenom, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Prenom, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            @Html.LabelFor(m => m.Email, new { @class = "form-label" })
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            @Html.LabelFor(m => m.Telephone, new { @class = "form-label" })
+                            @Html.TextBoxFor(m => m.Telephone, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            @Html.LabelFor(m => m.DateEmbauche, new { @class = "form-label" })
+                            @Html.TextBoxFor(m => m.DateEmbauche, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                            @Html.ValidationMessageFor(m => m.DateEmbauche, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            @Html.LabelFor(m => m.Poste, new { @class = "form-label" })
+                            @Html.TextBoxFor(m => m.Poste, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            @Html.LabelFor(m => m.Departement, new { @class = "form-label" })
+                            @Html.TextBoxFor(m => m.Departement, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            @Html.LabelFor(m => m.SalaireBase, new { @class = "form-label" })
+                            <div class="input-group">
+                                @Html.TextBoxFor(m => m.SalaireBase, new { @class = "form-control", type = "number", step = "0.01" })
+                                <span class="input-group-text">€</span>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.SalaireBase, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            @Html.LabelFor(m => m.SoldeConges, new { @class = "form-label" })
+                            <div class="input-group">
+                                @Html.TextBoxFor(m => m.SoldeConges, new { @class = "form-control", type = "number" })
+                                <span class="input-group-text">jours</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3 d-flex align-items-end">
+                            <div class="form-check">
+                                @Html.CheckBoxFor(m => m.EstActif, new { @class = "form-check-input" })
+                                @Html.LabelFor(m => m.EstActif, new { @class = "form-check-label" })
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mt-4">
+                        @Html.ActionLink("Retour", "Index", null, new { @class = "btn btn-secondary" })
+                        <button type="submit" class="btn btn-warning"><i class="bi bi-check-lg me-2"></i>Enregistrer</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,35 @@
+@model ProjetASP.Models.Conge
+@{
+    ViewData["Title"] = "Approuver le congé";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow border-success">
+            <div class="card-header bg-success text-white">
+                <h4><i class="bi bi-check-circle me-2"></i>Approuver la demande</h4>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-info">
+                    <strong>Demande de @Model.Employe?.NomComplet</strong><br/>
+                    @Model.Type : du @Model.DateDebut.ToString("dd/MM/yyyy") au @Model.DateFin.ToString("dd/MM/yyyy") (@Model.NombreJours jours)
+                </div>
+                
+                @using (Html.BeginForm("Approve", "Conges", new { id = Model.Id }, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Commentaire (optionnel)</label>
+                        <textarea name="commentaireRH" class="form-control" rows="3" placeholder="Ajouter un commentaire..."></textarea>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between">
+                        <a href="@Url.Action("Index", "Conges")" class="btn btn-secondary"><i class="bi bi-arrow-left me-2"></i>Annuler</a>
+                        <button type="submit" class="btn btn-success"><i class="bi bi-check-lg me-2"></i>Confirmer l'approbation</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

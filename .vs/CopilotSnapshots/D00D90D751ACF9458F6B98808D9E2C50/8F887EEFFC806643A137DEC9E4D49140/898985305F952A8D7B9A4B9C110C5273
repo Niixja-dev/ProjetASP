@@ -1,0 +1,84 @@
+﻿@model IEnumerable<ProjetASP.Models.Conge>
+@{
+    ViewData["Title"] = "Gestion des congés";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="bi bi-calendar-check me-2"></i>Gestion des congés</h2>
+    <a href="@Url.Action("Create", "Conges")" class="btn btn-primary"><i class="bi bi-calendar-plus me-2"></i>Nouvelle demande</a>
+</div>
+
+<div class="card shadow">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>Employé</th>
+                        <th>Type</th>
+                        <th>Période</th>
+                        <th>Jours</th>
+                        <th>Demande</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var conge in Model)
+                    {
+                        <tr>
+                            <td>@conge.Employe?.NomComplet</td>
+                            <td>@conge.Type</td>
+                            <td>@conge.DateDebut.ToString("dd/MM/yyyy") - @conge.DateFin.ToString("dd/MM/yyyy")</td>
+                            <td><span class="badge bg-secondary">@conge.NombreJours j</span></td>
+                            <td>@conge.DateDemande.ToString("dd/MM/yyyy")</td>
+                            <td>
+                                @if (conge.Statut == StatutConge.EnAttente)
+                                {
+                                    <span class="badge bg-warning text-dark">En attente</span>
+                                }
+                                else if (conge.Statut == StatutConge.Approuve)
+                                {
+                                    <span class="badge bg-success">Approuvé</span>
+                                }
+                                else if (conge.Statut == StatutConge.Refuse)
+                                {
+                                    <span class="badge bg-danger">Refusé</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">Annulé</span>
+                                }
+                            </td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    <a href="@Url.Action("Details", "Conges", new { id = conge.Id })" class="btn btn-outline-info" title="Détails"><i class="bi bi-eye"></i></a>
+                                    @if (conge.Statut == StatutConge.EnAttente)
+                                    {
+                                        <a href="@Url.Action("Approve", "Conges", new { id = conge.Id })" class="btn btn-outline-success" title="Approuver"><i class="bi bi-check-lg"></i></a>
+                                        @using (Html.BeginForm("Refuse", "Conges", new { id = conge.Id }, FormMethod.Post, new { style = "display:inline;" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="btn btn-outline-danger btn-sm" title="Refuser"><i class="bi bi-x-lg"></i></button>
+                                        }
+                                    }
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <a href="@Url.Action("Delete", "Conges", new { id = conge.Id })" class="btn btn-outline-danger" title="Supprimer"><i class="bi bi-trash"></i></a>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        @if (!Model.Any())
+        {
+            <div class="text-center text-muted py-4">
+                <i class="bi bi-inbox fs-1"></i>
+                <p class="mt-2">Aucune demande de congé trouvée</p>
+            </div>
+        }
+    </div>
+</div>

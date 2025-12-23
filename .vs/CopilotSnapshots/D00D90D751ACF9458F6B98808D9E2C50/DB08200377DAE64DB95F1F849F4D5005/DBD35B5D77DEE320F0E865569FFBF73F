@@ -1,0 +1,114 @@
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using ProjetASP.Models;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Configuration MySQL
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<GRHContext>(options =>
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+
+// Configuration Identity
+builder.Services.AddIdentity<Utilisateur, IdentityRole>(options =>
+{
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequiredLength = 6;
+})
+.AddEntityFrameworkStores<GRHContext>()
+.AddDefaultTokenProviders();
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Account/Login";
+    options.AccessDeniedPath = "/Account/AccessDenied";
+});
+
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+
+var app = builder.Build();
+
+// Seed des rôles et admin
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<GRHContext>();
+    var userManager = services.GetRequiredService<UserManager<Utilisateur>>();
+    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+    // Créer la base de données
+    context.Database.EnsureCreated();
+
+    // Créer les rôles
+    if (!roleManager.RoleExistsAsync("Admin").Result)
+    {
+        roleManager.CreateAsync(new IdentityRole("Admin")).Wait();
+    }
+    if (!roleManager.RoleExistsAsync("RH").Result)
+    {
+        roleManager.CreateAsync(new IdentityRole("RH")).Wait();
+    }
+
+    // Créer l'admin par défaut
+    var adminEmail = "admin@grh.com";
+    var adminUser = userManager.FindByEmailAsync(adminEmail).Result;
+
+    if (adminUser == null)
+    {
+        var admin = new Utilisateur
+        {
+            UserName = adminEmail,
+            Email = adminEmail,
+            Nom = "Administrateur",
+            Prenom = "Système",
+            EmailConfirmed = true,
+            NormalizedEmail = adminEmail.ToUpper(),
+            NormalizedUserName = adminEmail.ToUpper()
+        };
+
+        var result = userManager.CreateAsync(admin, "Admin123").Result;
+
+        if (result.Succeeded)
+        {
+            userManager.AddToRoleAsync(admin, "Admin").Wait();
+            Console.WriteLine("Admin créé avec succès !");
+        }
+        else
+        {
+            foreach (var error in result.Errors)
+            {
+                Console.WriteLine("Erreur création admin : " + error.Description);
+            }
+        }
+    }
+    else
+    {
+        Console.WriteLine("Admin existe déjà.");
+    }
+}
+
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
+}
+
+app.UseHttpsRedirection();
+app.UseRouting();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.MapStaticAssets();
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}")
+    .WithStaticAssets();
+
+app.Run();

@@ -1,0 +1,88 @@
+@model ProjetASP.Models.Paie
+@{
+    ViewData["Title"] = "Modifier fiche de paie";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card shadow">
+            <div class="card-header bg-warning">
+                <h4>Modifier la fiche de paie - @Model.Employe?.NomComplet (@Model.Periode)</h4>
+            </div>
+            <div class="card-body">
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="alert alert-danger">
+                        @Html.ValidationSummary(false, "", new { @class = "mb-0" })
+                    </div>
+                }
+                
+                <form asp-action="Edit" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="EmployeId" />
+                    <input type="hidden" asp-for="Mois" />
+                    <input type="hidden" asp-for="Annee" />
+                    <input type="hidden" asp-for="DatePaiement" />
+                    
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Salaire de base</label>
+                            <input asp-for="SalaireBase" class="form-control" type="number" step="0.01" />
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Primes</label>
+                            <input asp-for="Primes" class="form-control" type="number" step="0.01" />
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Heures supplémentaires</label>
+                            <input asp-for="HeuresSupplementaires" class="form-control" type="number" step="0.01" />
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Retenues</label>
+                            <input asp-for="Retenues" class="form-control" type="number" step="0.01" />
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Cotisations sociales</label>
+                            <input asp-for="CotisationsSociales" class="form-control" type="number" step="0.01" />
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Impôt sur le revenu</label>
+                            <input asp-for="ImpotRevenu" class="form-control" type="number" step="0.01" />
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Jours travaillés</label>
+                            <input asp-for="JoursTravailles" class="form-control" type="number" />
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Jours d'absence</label>
+                            <input asp-for="JoursAbsence" class="form-control" type="number" />
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="form-check mt-4">
+                                <input asp-for="EstPaye" class="form-check-input" />
+                                <label class="form-check-label">Payé</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Commentaire</label>
+                        <textarea asp-for="Commentaire" class="form-control" rows="2"></textarea>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mt-4">
+                        <a href="@Url.Action("Index", "Paies")" class="btn btn-secondary">Retour</a>
+                        <button type="submit" class="btn btn-warning">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

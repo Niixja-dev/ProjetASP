@@ -1,0 +1,110 @@
+﻿@model ProjetASP.Models.Employe
+@{
+    ViewData["Title"] = "Détails employé";
+}
+
+<div class="row">
+    <div class="col-md-10 offset-md-1">
+        <div class="card shadow mb-4">
+            <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
+                <h4 class="mb-0"><i class="bi bi-person-badge me-2"></i>@Model.NomComplet</h4>
+                <span class="badge bg-light text-dark fs-6">@Model.Matricule</span>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="border-bottom pb-2 mb-3">Informations personnelles</h5>
+                        <dl class="row">
+                            <dt class="col-sm-4">Nom</dt>
+                            <dd class="col-sm-8">@Model.Nom</dd>
+                            <dt class="col-sm-4">Prénom</dt>
+                            <dd class="col-sm-8">@Model.Prenom</dd>
+                            <dt class="col-sm-4">Email</dt>
+                            <dd class="col-sm-8"><a href="mailto:@Model.Email">@Model.Email</a></dd>
+                            <dt class="col-sm-4">Téléphone</dt>
+                            <dd class="col-sm-8">@(Model.Telephone ?? "Non renseigné")</dd>
+                        </dl>
+                    </div>
+                    <div class="col-md-6">
+                        <h5 class="border-bottom pb-2 mb-3">Informations professionnelles</h5>
+                        <dl class="row">
+                            <dt class="col-sm-4">Poste</dt>
+                            <dd class="col-sm-8">@(Model.Poste ?? "Non renseigné")</dd>
+                            <dt class="col-sm-4">Département</dt>
+                            <dd class="col-sm-8">@(Model.Departement ?? "Non renseigné")</dd>
+                            <dt class="col-sm-4">Date d'embauche</dt>
+                            <dd class="col-sm-8">@Model.DateEmbauche.ToString("dd/MM/yyyy")</dd>
+                            <dt class="col-sm-4">Ancienneté</dt>
+                            <dd class="col-sm-8">@((DateTime.Now - Model.DateEmbauche).Days / 365) ans</dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <h5 class="border-bottom pb-2 mb-3">Rémunération</h5>
+                        <dl class="row">
+                            <dt class="col-sm-4">Salaire de base</dt>
+                            <dd class="col-sm-8"><strong class="text-success">@Model.SalaireBase.ToString("N2") €</strong></dd>
+                        </dl>
+                    </div>
+                    <div class="col-md-6">
+                        <h5 class="border-bottom pb-2 mb-3">Congés</h5>
+                        <dl class="row">
+                            <dt class="col-sm-4">Solde actuel</dt>
+                            <dd class="col-sm-8"><span class="badge bg-info fs-6">@Model.SoldeConges jours</span></dd>
+                            <dt class="col-sm-4">Statut</dt>
+                            <dd class="col-sm-8">
+                                @if (Model.EstActif)
+                                {
+                                    <span class="badge bg-success">Actif</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">Inactif</span>
+                                }
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+                <a asp-action="Index" class="btn btn-secondary"><i class="bi bi-arrow-left me-2"></i>Retour</a>
+                <div>
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning"><i class="bi bi-pencil me-2"></i>Modifier</a>
+                    <a asp-controller="Conges" asp-action="Create" asp-route-employeId="@Model.Id" class="btn btn-info"><i class="bi bi-calendar-plus me-2"></i>Demander congé</a>
+                </div>
+            </div>
+        </div>
+
+        @if (Model.Conges?.Any() == true)
+        {
+            <div class="card shadow mb-4">
+                <div class="card-header"><h5 class="mb-0"><i class="bi bi-calendar-check me-2"></i>Historique des congés</h5></div>
+                <div class="card-body">
+                    <table class="table table-sm">
+                        <thead><tr><th>Type</th><th>Période</th><th>Jours</th><th>Statut</th></tr></thead>
+                        <tbody>
+                            @foreach (var conge in Model.Conges.OrderByDescending(c => c.DateDebut).Take(5))
+                            {
+                                <tr>
+                                    <td>@conge.Type</td>
+                                    <td>@conge.DateDebut.ToString("dd/MM/yyyy") - @conge.DateFin.ToString("dd/MM/yyyy")</td>
+                                    <td>@conge.NombreJours</td>
+                                    <td>
+                                        @switch (conge.Statut)
+                                        {
+                                            case ProjetASP.Models.StatutConge.EnAttente: <span class="badge bg-warning">En attente</span> break;
+                                            case ProjetASP.Models.StatutConge.Approuve: <span class="badge bg-success">Approuvé</span> break;
+                                            case ProjetASP.Models.StatutConge.Refuse: <span class="badge bg-danger">Refusé</span> break;
+                                            default: <span class="badge bg-secondary">@conge.Statut</span> break;
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,223 @@
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using ProjetASP.Models;
+
+namespace ProjetASP.Controllers
+{
+    [Authorize(Roles = "Admin,RH")]
+    public class CongesController : Controller
+    {
+        private readonly GRHContext _context;
+
+        public CongesController(GRHContext context)
+        {
+            _context = context;
+        }
+
+        // GET: Conges
+        public async Task<IActionResult> Index(StatutConge? statut, int? employeId)
+        {
+            var conges = _context.Conges.Include(c => c.Employe).AsQueryable();
+
+            if (statut.HasValue)
+            {
+                conges = conges.Where(c => c.Statut == statut.Value);
+            }
+
+            if (employeId.HasValue)
+            {
+                conges = conges.Where(c => c.EmployeId == employeId.Value);
+            }
+
+            ViewBag.Employes = new SelectList(await _context.Employes.ToListAsync(), "Id", "NomComplet");
+            ViewBag.StatutActuel = statut;
+
+            return View(await conges.OrderByDescending(c => c.DateDemande).ToListAsync());
+        }
+
+        // GET: Conges/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var conge = await _context.Conges
+                .Include(c => c.Employe)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (conge == null)
+            {
+                return NotFound();
+            }
+
+            return View(conge);
+        }
+
+        // GET: Conges/Create
+        public async Task<IActionResult> Create()
+        {
+            ViewBag.Employes = new SelectList(await _context.Employes.Where(e => e.EstActif).ToListAsync(), "Id", "NomComplet");
+            return View(new Conge { DateDebut = DateTime.Today, DateFin = DateTime.Today });
+        }
+
+        // POST: Conges/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("EmployeId,Type,DateDebut,DateFin,Motif")] Conge conge)
+        {
+            if (ModelState.IsValid)
+            {
+                // Vérifier le solde de congés
+                var employe = await _context.Employes.FindAsync(conge.EmployeId);
+                if (employe == null)
+                {
+                    return NotFound();
+                }
+
+                var nombreJours = (conge.DateFin - conge.DateDebut).Days + 1;
+
+                if (conge.Type == TypeConge.Annuel && nombreJours > employe.SoldeConges)
+                {
+                    ModelState.AddModelError("", $"Solde de congés insuffisant. Solde actuel: {employe.SoldeConges} jours.");
+                    ViewBag.Employes = new SelectList(await _context.Employes.Where(e => e.EstActif).ToListAsync(), "Id", "NomComplet", conge.EmployeId);
+                    return View(conge);
+                }
+
+                // Vérifier les chevauchements
+                var chevauchement = await _context.Conges
+                    .Where(c => c.EmployeId == conge.EmployeId 
+                        && c.Statut != StatutConge.Refuse 
+                        && c.Statut != StatutConge.Annule
+                        && ((conge.DateDebut >= c.DateDebut && conge.DateDebut <= c.DateFin)
+                            || (conge.DateFin >= c.DateDebut && conge.DateFin <= c.DateFin)))
+                    .AnyAsync();
+
+                if (chevauchement)
+                {
+                    ModelState.AddModelError("", "Cette période chevauche une demande de congé existante.");
+                    ViewBag.Employes = new SelectList(await _context.Employes.Where(e => e.EstActif).ToListAsync(), "Id", "NomComplet", conge.EmployeId);
+                    return View(conge);
+                }
+
+                conge.DateDemande = DateTime.Now;
+                conge.Statut = StatutConge.EnAttente;
+
+                _context.Add(conge);
+                await _context.SaveChangesAsync();
+                TempData["Success"] = "Demande de congé créée avec succès.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            ViewBag.Employes = new SelectList(await _context.Employes.Where(e => e.EstActif).ToListAsync(), "Id", "NomComplet", conge.EmployeId);
+            return View(conge);
+        }
+
+        // GET: Conges/Approve/5
+        public async Task<IActionResult> Approve(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var conge = await _context.Conges
+                .Include(c => c.Employe)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (conge == null)
+            {
+                return NotFound();
+            }
+
+            return View(conge);
+        }
+
+        // POST: Conges/Approve/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Approve(int id, string? commentaireRH)
+        {
+            var conge = await _context.Conges.Include(c => c.Employe).FirstOrDefaultAsync(c => c.Id == id);
+
+            if (conge == null)
+            {
+                return NotFound();
+            }
+
+            conge.Statut = StatutConge.Approuve;
+            conge.CommentaireRH = commentaireRH;
+
+            // Déduire du solde si congé annuel
+            if (conge.Type == TypeConge.Annuel && conge.Employe != null)
+            {
+                conge.Employe.SoldeConges -= conge.NombreJours;
+            }
+
+            await _context.SaveChangesAsync();
+            TempData["Success"] = "Congé approuvé avec succès.";
+            return RedirectToAction(nameof(Index));
+        }
+
+        // POST: Conges/Refuse/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Refuse(int id, string? commentaireRH)
+        {
+            var conge = await _context.Conges.FindAsync(id);
+
+            if (conge == null)
+            {
+                return NotFound();
+            }
+
+            conge.Statut = StatutConge.Refuse;
+            conge.CommentaireRH = commentaireRH;
+
+            await _context.SaveChangesAsync();
+            TempData["Success"] = "Congé refusé.";
+            return RedirectToAction(nameof(Index));
+        }
+
+        // GET: Conges/Delete/5
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var conge = await _context.Conges
+                .Include(c => c.Employe)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (conge == null)
+            {
+                return NotFound();
+            }
+
+            return View(conge);
+        }
+
+        // POST: Conges/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var conge = await _context.Conges.FindAsync(id);
+            if (conge != null)
+            {
+                _context.Conges.Remove(conge);
+                await _context.SaveChangesAsync();
+                TempData["Success"] = "Congé supprimé avec succès.";
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+    }
+}

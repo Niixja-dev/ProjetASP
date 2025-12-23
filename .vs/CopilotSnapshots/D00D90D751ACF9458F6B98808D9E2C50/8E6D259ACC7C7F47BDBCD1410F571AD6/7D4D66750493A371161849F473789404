@@ -1,0 +1,46 @@
+﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ProjetASP.Models;
+
+namespace ProjetASP.Controllers
+{
+    public class HomeController : Controller
+    {
+        private readonly GRHContext _context;
+
+        public HomeController(GRHContext context)
+        {
+            _context = context;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            if (User.Identity?.IsAuthenticated == true)
+            {
+                ViewBag.TotalEmployes = await _context.Employes.CountAsync();
+                ViewBag.EmployesActifs = await _context.Employes.Where(e => e.EstActif).CountAsync();
+                ViewBag.CongesEnAttente = await _context.Conges.Where(c => c.Statut == StatutConge.EnAttente).CountAsync();
+                ViewBag.PaiesNonPayees = await _context.Paies.Where(p => !p.EstPaye).CountAsync();
+                
+                var moisActuel = DateTime.Now.Month;
+                var anneeActuelle = DateTime.Now.Year;
+                ViewBag.MasseSalariale = await _context.Paies
+                    .Where(p => p.Mois == moisActuel && p.Annee == anneeActuelle)
+                    .SumAsync(p => p.SalaireBase + p.Primes + p.HeuresSupplementaires - p.Retenues - p.CotisationsSociales - p.ImpotRevenu);
+            }
+            return View();
+        }
+
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+    }
+}

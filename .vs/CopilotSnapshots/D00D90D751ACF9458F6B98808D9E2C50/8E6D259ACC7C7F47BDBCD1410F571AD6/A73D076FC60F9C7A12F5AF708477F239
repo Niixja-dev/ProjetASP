@@ -1,0 +1,169 @@
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ProjetASP.Models;
+
+namespace ProjetASP.Controllers
+{
+    [Authorize(Roles = "Admin,RH")]
+    public class EmployesController : Controller
+    {
+        private readonly GRHContext _context;
+
+        public EmployesController(GRHContext context)
+        {
+            _context = context;
+        }
+
+        // GET: Employes
+        public IActionResult Index(string? searchString, string? departement)
+        {
+            var employes = from e in _context.Employes select e;
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                employes = employes.Where(e => e.Nom.Contains(searchString) 
+                    || e.Prenom.Contains(searchString) 
+                    || e.Matricule.Contains(searchString));
+            }
+
+            if (!string.IsNullOrEmpty(departement))
+            {
+                employes = employes.Where(e => e.Departement == departement);
+            }
+
+            ViewBag.Departements = _context.Employes
+                .Where(e => e.Departement != null)
+                .Select(e => e.Departement)
+                .Distinct()
+                .ToList();
+
+            return View(employes.OrderBy(e => e.Nom).ToList());
+        }
+
+        // GET: Employes/Details/5
+        public IActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var employe = _context.Employes
+                .Include(e => e.Conges)
+                .Include(e => e.Paies)
+                .FirstOrDefault(m => m.Id == id);
+
+            if (employe == null)
+            {
+                return NotFound();
+            }
+
+            return View(employe);
+        }
+
+        // GET: Employes/Create
+        public IActionResult Create()
+        {
+            var employe = new Employe
+            {
+                DateEmbauche = DateTime.Today,
+                Matricule = GenerateMatricule()
+            };
+            return View(employe);
+        }
+
+        // POST: Employes/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Employe employe)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Employes.Add(employe);
+                _context.SaveChanges();
+                TempData["Success"] = "Employé créé avec succès.";
+                return RedirectToAction("Index");
+            }
+            return View(employe);
+        }
+
+        // GET: Employes/Edit/5
+        public IActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var employe = _context.Employes.Find(id);
+            if (employe == null)
+            {
+                return NotFound();
+            }
+            return View(employe);
+        }
+
+        // POST: Employes/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, Employe employe)
+        {
+            if (id != employe.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                _context.Employes.Update(employe);
+                _context.SaveChanges();
+                TempData["Success"] = "Employé modifié avec succès.";
+                return RedirectToAction("Index");
+            }
+            return View(employe);
+        }
+
+        // GET: Employes/Delete/5
+        [Authorize(Roles = "Admin")]
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var employe = _context.Employes.FirstOrDefault(m => m.Id == id);
+            if (employe == null)
+            {
+                return NotFound();
+            }
+
+            return View(employe);
+        }
+
+        // POST: Employes/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var employe = _context.Employes.Find(id);
+            if (employe != null)
+            {
+                _context.Employes.Remove(employe);
+                _context.SaveChanges();
+                TempData["Success"] = "Employé supprimé avec succès.";
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        private string GenerateMatricule()
+        {
+            var year = DateTime.Now.Year.ToString().Substring(2);
+            var count = _context.Employes.Count() + 1;
+            return "EMP" + year + count.ToString("D4");
+        }
+    }
+}

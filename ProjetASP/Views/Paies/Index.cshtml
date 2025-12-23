@@ -1,0 +1,56 @@
+@model IEnumerable<ProjetASP.Models.Paie>
+@{
+    ViewData["Title"] = "Gestion de la paie";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="bi bi-cash-stack me-2"></i>Gestion de la paie</h2>
+    <div>
+        <a href="@Url.Action("GenerateMonthly", "Paies")" class="btn btn-success me-2"><i class="bi bi-calculator me-2"></i>Génération mensuelle</a>
+        <a href="@Url.Action("Create", "Paies")" class="btn btn-primary"><i class="bi bi-plus-lg me-2"></i>Nouvelle fiche</a>
+    </div>
+</div>
+
+<div class="card shadow">
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th>Employé</th>
+                    <th>Période</th>
+                    <th>Brut</th>
+                    <th>Déductions</th>
+                    <th>Net</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var paie in Model)
+                {
+                    <tr>
+                        <td>@paie.Employe?.NomComplet</td>
+                        <td>@paie.Periode</td>
+                        <td>@paie.SalaireBrut.ToString("N2") €</td>
+                        <td class="text-danger">-@paie.TotalDeductions.ToString("N2") €</td>
+                        <td><strong class="text-success">@paie.SalaireNet.ToString("N2") €</strong></td>
+                        <td>
+                            @if (paie.EstPaye)
+                            {
+                                <span class="badge bg-success">Payé</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-warning text-dark">En attente</span>
+                            }
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Details", "Paies", new { id = paie.Id })" class="btn btn-sm btn-outline-info">Détails</a>
+                            <a href="@Url.Action("Edit", "Paies", new { id = paie.Id })" class="btn btn-sm btn-outline-warning">Modifier</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

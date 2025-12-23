@@ -1,0 +1,191 @@
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using ProjetASP.Models;
+
+namespace ProjetASP.Controllers
+{
+    [Authorize(Roles = "Admin,RH")]
+    public class CongesController : Controller
+    {
+        private readonly GRHContext _context;
+
+        public CongesController(GRHContext context)
+        {
+            _context = context;
+        }
+
+        // GET: Conges
+        public IActionResult Index()
+        {
+            var conges = _context.Conges.Include(c => c.Employe).OrderByDescending(c => c.DateDemande).ToList();
+            ViewBag.Employes = new SelectList(_context.Employes.ToList(), "Id", "NomComplet");
+            return View(conges);
+        }
+
+        // GET: Conges/Details/5
+        public IActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var conge = _context.Conges.Include(c => c.Employe).FirstOrDefault(m => m.Id == id);
+
+            if (conge == null)
+            {
+                return NotFound();
+            }
+
+            return View(conge);
+        }
+
+        // GET: Conges/Create
+        public IActionResult Create()
+        {
+            ViewBag.Employes = new SelectList(_context.Employes.Where(e => e.EstActif).ToList(), "Id", "NomComplet");
+            var conge = new Conge();
+            conge.DateDebut = DateTime.Today;
+            conge.DateFin = DateTime.Today;
+            return View(conge);
+        }
+
+        // POST: Conges/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Conge conge)
+        {
+            if (ModelState.IsValid)
+            {
+                // Vérifier le solde de congés
+                var employe = _context.Employes.Find(conge.EmployeId);
+                if (employe == null)
+                {
+                    return NotFound();
+                }
+
+                var nombreJours = (conge.DateFin - conge.DateDebut).Days + 1;
+
+                if (conge.Type == TypeConge.Annuel && nombreJours > employe.SoldeConges)
+                {
+                    ModelState.AddModelError("", "Solde de congés insuffisant. Solde actuel: " + employe.SoldeConges + " jours.");
+                    ViewBag.Employes = new SelectList(_context.Employes.Where(e => e.EstActif).ToList(), "Id", "NomComplet", conge.EmployeId);
+                    return View(conge);
+                }
+
+                conge.DateDemande = DateTime.Now;
+                conge.Statut = StatutConge.EnAttente;
+
+                _context.Conges.Add(conge);
+                _context.SaveChanges();
+                TempData["Success"] = "Demande de congé créée avec succès.";
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.Employes = new SelectList(_context.Employes.Where(e => e.EstActif).ToList(), "Id", "NomComplet", conge.EmployeId);
+            return View(conge);
+        }
+
+        // GET: Conges/Approve/5
+        public IActionResult Approve(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var conge = _context.Conges.Include(c => c.Employe).FirstOrDefault(m => m.Id == id);
+
+            if (conge == null)
+            {
+                return NotFound();
+            }
+
+            return View(conge);
+        }
+
+        // POST: Conges/Approve/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Approve(int id, string commentaireRH)
+        {
+            var conge = _context.Conges.Include(c => c.Employe).FirstOrDefault(c => c.Id == id);
+
+            if (conge == null)
+            {
+                return NotFound();
+            }
+
+            conge.Statut = StatutConge.Approuve;
+            conge.CommentaireRH = commentaireRH;
+
+            // Déduire du solde si congé annuel
+            if (conge.Type == TypeConge.Annuel && conge.Employe != null)
+            {
+                conge.Employe.SoldeConges = conge.Employe.SoldeConges - conge.NombreJours;
+            }
+
+            _context.SaveChanges();
+            TempData["Success"] = "Congé approuvé avec succès.";
+            return RedirectToAction("Index");
+        }
+
+        // POST: Conges/Refuse/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Refuse(int id, string commentaireRH)
+        {
+            var conge = _context.Conges.Find(id);
+
+            if (conge == null)
+            {
+                return NotFound();
+            }
+
+            conge.Statut = StatutConge.Refuse;
+            conge.CommentaireRH = commentaireRH;
+
+            _context.SaveChanges();
+            TempData["Success"] = "Congé refusé.";
+            return RedirectToAction("Index");
+        }
+
+        // GET: Conges/Delete/5
+        [Authorize(Roles = "Admin")]
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var conge = _context.Conges.Include(c => c.Employe).FirstOrDefault(m => m.Id == id);
+
+            if (conge == null)
+            {
+                return NotFound();
+            }
+
+            return View(conge);
+        }
+
+        // POST: Conges/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var conge = _context.Conges.Find(id);
+            if (conge != null)
+            {
+                _context.Conges.Remove(conge);
+                _context.SaveChanges();
+                TempData["Success"] = "Congé supprimé avec succès.";
+            }
+
+            return RedirectToAction("Index");
+        }
+    }
+}

@@ -1,0 +1,120 @@
+﻿@model IEnumerable<ProjetASP.Models.Paie>
+@{
+    ViewData["Title"] = "Gestion de la paie";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="bi bi-cash-stack me-2"></i>Gestion de la paie</h2>
+    <div>
+        <a asp-action="GenerateMonthly" class="btn btn-success me-2"><i class="bi bi-calculator me-2"></i>Génération mensuelle</a>
+        <a asp-action="Create" class="btn btn-primary"><i class="bi bi-plus-lg me-2"></i>Nouvelle fiche</a>
+    </div>
+</div>
+
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <form method="get" class="row g-3">
+            <div class="col-md-2">
+                <select name="mois" class="form-select">
+                    @for (int i = 1; i <= 12; i++)
+                    {
+                        <option value="@i" selected="@(ViewBag.MoisActuel == i)">@System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i)</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-2">
+                <select name="annee" class="form-select">
+                    @for (int i = DateTime.Now.Year; i >= DateTime.Now.Year - 5; i--)
+                    {
+                        <option value="@i" selected="@(ViewBag.AnneeActuelle == i)">@i</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <select name="employeId" class="form-select" asp-items="@ViewBag.Employes">
+                    <option value="">Tous les employés</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-outline-primary w-100"><i class="bi bi-search me-2"></i>Filtrer</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card shadow">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>Employé</th>
+                        <th>Période</th>
+                        <th class="text-end">Brut</th>
+                        <th class="text-end">Déductions</th>
+                        <th class="text-end">Net</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var paie in Model)
+                    {
+                        <tr>
+                            <td>@paie.Employe?.NomComplet</td>
+                            <td>@paie.Periode</td>
+                            <td class="text-end">@paie.SalaireBrut.ToString("N2") €</td>
+                            <td class="text-end text-danger">-@paie.TotalDeductions.ToString("N2") €</td>
+                            <td class="text-end"><strong class="text-success">@paie.SalaireNet.ToString("N2") €</strong></td>
+                            <td>
+                                @if (paie.EstPaye)
+                                {
+                                    <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>Payé</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-warning text-dark"><i class="bi bi-clock me-1"></i>En attente</span>
+                                }
+                            </td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    <a asp-action="Details" asp-route-id="@paie.Id" class="btn btn-outline-info" title="Détails"><i class="bi bi-eye"></i></a>
+                                    <a asp-action="Edit" asp-route-id="@paie.Id" class="btn btn-outline-warning" title="Modifier"><i class="bi bi-pencil"></i></a>
+                                    @if (!paie.EstPaye)
+                                    {
+                                        <form asp-action="MarkAsPaid" asp-route-id="@paie.Id" method="post" style="display:inline;">
+                                            <button type="submit" class="btn btn-outline-success btn-sm" title="Marquer payé"><i class="bi bi-check-lg"></i></button>
+                                        </form>
+                                    }
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <a asp-action="Delete" asp-route-id="@paie.Id" class="btn btn-outline-danger" title="Supprimer"><i class="bi bi-trash"></i></a>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                @if (Model.Any())
+                {
+                    <tfoot class="table-light">
+                        <tr>
+                            <th colspan="2">Total</th>
+                            <th class="text-end">@Model.Sum(p => p.SalaireBrut).ToString("N2") €</th>
+                            <th class="text-end text-danger">-@Model.Sum(p => p.TotalDeductions).ToString("N2") €</th>
+                            <th class="text-end text-success">@Model.Sum(p => p.SalaireNet).ToString("N2") €</th>
+                            <th colspan="2"></th>
+                        </tr>
+                    </tfoot>
+                }
+            </table>
+        </div>
+        @if (!Model.Any())
+        {
+            <div class="text-center text-muted py-4">
+                <i class="bi bi-inbox fs-1"></i>
+                <p class="mt-2">Aucune fiche de paie trouvée</p>
+            </div>
+        }
+    </div>
+</div>

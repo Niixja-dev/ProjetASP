@@ -1,0 +1,61 @@
+﻿@model ProjetASP.Models.Paie
+@{
+    ViewData["Title"] = "Modifier fiche de paie";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card shadow">
+            <div class="card-header bg-warning">
+                <h4>Modifier la fiche de paie</h4>
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm("Edit", "Paies", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(m => m.Id)
+                    @Html.HiddenFor(m => m.EmployeId)
+                    @Html.HiddenFor(m => m.Mois)
+                    @Html.HiddenFor(m => m.Annee)
+                    
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Salaire de base</label>
+                            @Html.TextBoxFor(m => m.SalaireBase, new { @class = "form-control", type = "number", step = "0.01" })
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Primes</label>
+                            @Html.TextBoxFor(m => m.Primes, new { @class = "form-control", type = "number", step = "0.01" })
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Retenues</label>
+                            @Html.TextBoxFor(m => m.Retenues, new { @class = "form-control", type = "number", step = "0.01" })
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Jours travaillés</label>
+                            @Html.TextBoxFor(m => m.JoursTravailles, new { @class = "form-control", type = "number" })
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Jours d'absence</label>
+                            @Html.TextBoxFor(m => m.JoursAbsence, new { @class = "form-control", type = "number" })
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="form-check mt-4">
+                                @Html.CheckBoxFor(m => m.EstPaye, new { @class = "form-check-input" })
+                                <label class="form-check-label">Payé</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mt-4">
+                        <a href="@Url.Action("Index", "Paies")" class="btn btn-secondary">Retour</a>
+                        <button type="submit" class="btn btn-warning">Enregistrer</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
