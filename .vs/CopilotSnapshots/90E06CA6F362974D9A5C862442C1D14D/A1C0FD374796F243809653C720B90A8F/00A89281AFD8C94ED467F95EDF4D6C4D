@@ -1,0 +1,109 @@
+﻿@{
+    ViewData["Title"] = "Tableau de bord";
+}
+
+@if (User.Identity != null && User.Identity.IsAuthenticated)
+{
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2>Tableau de bord</h2>
+            <p class="text-muted">Bienvenue dans le système de gestion des ressources humaines</p>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white h-100">
+                <div class="card-body">
+                    <h6 class="card-title">Employés actifs</h6>
+                    <h2 class="mb-0">@(ViewBag.EmployesActifs ?? 0)</h2>
+                </div>
+                <div class="card-footer bg-transparent border-0">
+                    <a href="@Url.Action("Index", "Employes")" class="text-white">Voir les détails</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-dark h-100">
+                <div class="card-body">
+                    <h6 class="card-title">Congés en attente</h6>
+                    <h2 class="mb-0">@(ViewBag.CongesEnAttente ?? 0)</h2>
+                </div>
+                <div class="card-footer bg-transparent border-0">
+                    <a href="@Url.Action("Index", "Conges")" class="text-dark">Traiter les demandes</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-danger text-white h-100">
+                <div class="card-body">
+                    <h6 class="card-title">Paies non payées</h6>
+                    <h2 class="mb-0">@(ViewBag.PaiesNonPayees ?? 0)</h2>
+                </div>
+                <div class="card-footer bg-transparent border-0">
+                    <a href="@Url.Action("Index", "Paies")" class="text-white">Gérer la paie</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white h-100">
+                <div class="card-body">
+                    <h6 class="card-title">Masse salariale</h6>
+                    @{
+                        var masse = ViewBag.MasseSalariale ?? 0m;
+                    }
+                    <h2 class="mb-0">@masse.ToString("N0") €</h2>
+                </div>
+                <div class="card-footer bg-transparent border-0">
+                    <small>Ce mois-ci</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Actions rapides</div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <a href="@Url.Action("Create", "Employes")" class="btn btn-outline-primary">Ajouter un employé</a>
+                        <a href="@Url.Action("Create", "Conges")" class="btn btn-outline-warning">Nouvelle demande de congé</a>
+                        <a href="@Url.Action("GenerateMonthly", "Paies")" class="btn btn-outline-success">Générer les fiches de paie</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Informations système</div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Total employés</span>
+                            <strong>@(ViewBag.TotalEmployes ?? 0)</strong>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Mois en cours</span>
+                            <strong>@DateTime.Now.ToString("MMMM yyyy")</strong>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Utilisateur connecté</span>
+                            <strong>@User.Identity?.Name</strong>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6 text-center">
+            <h1 class="mt-3">Système de Gestion RH</h1>
+            <p class="lead text-muted">Gérez vos employés, congés et paie en toute simplicité</p>
+            <a href="@Url.Action("Login", "Account")" class="btn btn-primary btn-lg mt-3">Se connecter</a>
+        </div>
+    </div>
+}

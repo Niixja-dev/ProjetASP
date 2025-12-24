@@ -171,7 +171,7 @@
               "RelativeDocumentMoniker": "ProjetASP\\Program.cs",
               "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Program.cs",
               "RelativeToolTip": "ProjetASP\\Program.cs",
-              "ViewState": "AgIAAHcAAAAAAAAAAAAEwIMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAIMAAAAAAAAAAAAAAIMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-23T20:05:38.558Z",
               "EditorCaption": ""
@@ -186,8 +186,7 @@
               "RelativeToolTip": "..\\..\\..\\Users\\Abdel\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\-1473887630\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-23T20:05:26.998Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-23T20:05:26.998Z"
             },
             {
               "$type": "Document",
@@ -199,8 +198,7 @@
               "RelativeToolTip": "ProjetASP\\Views\\Account\\Login.cshtml",
               "ViewState": "AgIAACwAAAAAAAAAAIBJwCYAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-12-23T14:40:51.4Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-23T14:40:51.4Z"
             },
             {
               "$type": "Document",
@@ -308,8 +306,7 @@
               "RelativeToolTip": "ProjetASP\\Controllers\\AccountController.cs",
               "ViewState": "AgIAAJwAAAAAAAAAAIBJwGsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-23T14:33:51.116Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-23T14:33:51.116Z"
             },
             {
               "$type": "Document",
@@ -391,9 +388,10 @@
               "RelativeDocumentMoniker": "ProjetASP\\Views\\Home\\Index.cshtml",
               "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Views\\Home\\Index.cshtml",
               "RelativeToolTip": "ProjetASP\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAGoAAAAAAAAAAABRwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAHoBAAAAAAAAAIBJwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-12-23T14:40:15.557Z"
+              "WhenOpened": "2025-12-23T14:40:15.557Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -429,8 +427,7 @@
               "RelativeToolTip": "ProjetASP\\Views\\Paies\\Edit.cshtml",
               "ViewState": "AgIAAFYAAAAAAAAAAIBJwFgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-12-23T14:46:53.937Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-23T14:46:53.937Z"
             },
             {
               "$type": "Document",
@@ -536,9 +533,10 @@
               "RelativeDocumentMoniker": "ProjetASP\\Controllers\\HomeController.cs",
               "ToolTip": "C:\\Projets\\C#\\ProjetASP\\ProjetASP\\Controllers\\HomeController.cs",
               "RelativeToolTip": "ProjetASP\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAAC8AAAAAAAAAAEBVwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAGcAAAAAAAAAAEBVwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-23T14:37:25.515Z"
+              "WhenOpened": "2025-12-23T14:37:25.515Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -562,8 +560,7 @@
               "RelativeToolTip": "ProjetASP\\Controllers\\PaiesController.cs",
               "ViewState": "AgIAADEBAAAAAAAAAEBVwDUBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-23T14:37:05.026Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-23T14:37:05.026Z"
             },
             {
               "$type": "Document",

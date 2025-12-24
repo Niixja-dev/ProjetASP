@@ -1,4 +1,4 @@
-using System.Diagnostics;
+ï»¿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjetASP.Models;
@@ -32,9 +32,9 @@ namespace ProjetASP.Controllers
                 var paiesDuMois = _context.Paies.Where(p => p.Mois == moisActuel && p.Annee == anneeActuelle).ToList();
                 ViewBag.MasseSalariale = paiesDuMois.Sum(p => p.SalaireNet);
 
-                // ========== DONNÉES POUR LES GRAPHIQUES ==========
+                // ========== DONNÃ‰ES POUR LES GRAPHIQUES ==========
 
-                // 1. Répartition par département (Pie Chart)
+                // 1. RÃ©partition par dÃ©partement (Pie Chart)
                 var parDepartement = _context.Employes
                     .Where(e => e.EstActif && e.Departement != null)
                     .GroupBy(e => e.Departement)
@@ -43,7 +43,7 @@ namespace ProjetASP.Controllers
                 ViewBag.DepartementsLabels = System.Text.Json.JsonSerializer.Serialize(parDepartement.Select(d => d.Departement).ToArray());
                 ViewBag.DepartementsData = System.Text.Json.JsonSerializer.Serialize(parDepartement.Select(d => d.Count).ToArray());
 
-                // 2. Évolution masse salariale sur 6 mois (Line Chart)
+                // 2. Ã‰volution masse salariale sur 6 mois (Line Chart)
                 var masseSalariale6Mois = new List<decimal>();
                 var labels6Mois = new List<string>();
                 for (int i = 5; i >= 0; i--)
@@ -61,13 +61,13 @@ namespace ProjetASP.Controllers
                 ViewBag.MasseSalarialeLabels = System.Text.Json.JsonSerializer.Serialize(labels6Mois.ToArray());
                 ViewBag.MasseSalarialeData = System.Text.Json.JsonSerializer.Serialize(masseSalariale6Mois.ToArray());
 
-                // 3. Statut des congés (Doughnut Chart)
+                // 3. Statut des congÃ©s (Doughnut Chart)
                 var congesApprouves = _context.Conges.Count(c => c.Statut == StatutConge.Approuve);
                 var congesRefuses = _context.Conges.Count(c => c.Statut == StatutConge.Refuse);
                 var congesEnAttente = _context.Conges.Count(c => c.Statut == StatutConge.EnAttente);
                 ViewBag.CongesData = System.Text.Json.JsonSerializer.Serialize(new[] { congesApprouves, congesRefuses, congesEnAttente });
 
-                // 4. Types de congés (Bar Chart)
+                // 4. Types de congÃ©s (Bar Chart)
                 var parTypeConge = _context.Conges
                     .GroupBy(c => c.Type)
                     .Select(g => new { Type = g.Key.ToString(), Count = g.Count() })
